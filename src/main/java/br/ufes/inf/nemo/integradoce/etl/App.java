@@ -29,8 +29,6 @@ public class App {
 
 	}
 
-
-
 	public void extractTransformGeographicPoints(String csvFilePath, OWLOntology ontology)
 			throws ParseException, IOException {
 
@@ -62,9 +60,10 @@ public class App {
 
 
 
-
 	public static void main(String[] args) throws OWLOntologyCreationException, OWLOntologyStorageException,
 			SecurityException, IOException, ParseException {
+
+		String baseDir = "/Users/jpalmeida/Dropbox/Documents/ufes/projetos/riodoce/";
 
 		// setup logger
 		FileHandler fh = new FileHandler("etl.log", true);
@@ -81,13 +80,14 @@ public class App {
 
 		// extract geographic points from metadata file
 		app.extractTransformGeographicPoints(
-				"/Users/jpalmeida/Dropbox/Documents/ufes/projetos/riodoce/dados_renova_2021/Detalhamento_pontos_PMQQS.csv",
+				baseDir+
+				"dados_renova_2021/Detalhamento_pontos_PMQQS.csv",
 				ontology);
 
 		Load.addWellKnownEntities(ontology);
 
 		// take all csv files in the given folder and their immediate subfolders
-		File folder = new File("/Users/jpalmeida/Dropbox/Documents/ufes/projetos/riodoce/dados_renova_2021");
+		File folder = new File(baseDir+"dados_renova_2021");
 		for (File f : folder.listFiles())
 		{
 			// if the file is a directory, list the files and extract and transform the csv
@@ -105,10 +105,10 @@ public class App {
 
 		// extract geographic points from metadata file
 		UnespExtractTransform.extractTransformGeographicPointsUNESP(
-				"/Users/jpalmeida/Dropbox/Documents/ufes/projetos/riodoce/dados_unesp_2021/pontos.csv", ontology);
+			baseDir+"dados_unesp_2021/pontos.csv", ontology);
 
 		// take all csv files in the given folder and their immediate subfolders
-		folder = new File("/Users/jpalmeida/Dropbox/Documents/ufes/projetos/riodoce/dados_unesp_2021/agua");
+		folder = new File(baseDir+"dados_unesp_2021/agua");
 		for (File f : folder.listFiles())
 		{
 			// if the file is a directory, list the files and extract and transform the csv
