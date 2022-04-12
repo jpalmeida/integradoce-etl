@@ -38,7 +38,7 @@ public class Load {
      * Prefixes are required for all operations that will obtain instances of
      * OWLClass, OWLNamedIndividual
      */
-    private static PrefixManager rdfspm, gufopm, docepm, integradocepm;
+    private static PrefixManager rdfspm, gufopm, docepm, integradocepm, wgspm;
 
     /**
      * Represents the Doce River
@@ -54,6 +54,7 @@ public class Load {
         gufopm = new DefaultPrefixManager(null, null, "http://purl.org/nemo/gufo#");
         docepm = new DefaultPrefixManager(null, null, "http://purl.org/nemo/doce#");
         integradocepm = new DefaultPrefixManager(null, null, "http://purl.org/nemo/integradoce#");
+        wgspm = new DefaultPrefixManager(null, null, "http://www.w3.org/2003/01/geo/wgs84_pos#");
         riodoce = dataFactory.getOWLNamedIndividual(":RioDoce", docepm);
     }
 
@@ -100,7 +101,8 @@ public class Load {
 		manager.addAxiom(ontology, classAssertion);
 		classAssertion = dataFactory.getOWLClassAssertionAxiom(agentClass,
 				dataFactory.getOWLNamedIndividual("IntegradoceUNESP", integradocepm));
-	}
+                manager.addAxiom(ontology, classAssertion);
+        }
 
     /**
      * Adds a geographic point (instance of doce:GeographicPoint) 
@@ -109,8 +111,8 @@ public class Load {
      * 
      * :RCA-01 rdf:type owl:NamedIndividual ,
      *          doce:GeographicPoint ;
-     * 			doce:hasLatitude "-20.3471"^^xsd:float ;
-     * 	        doce:hasLongitude "-43.1127"^^xsd:float ;
+     * 			wgs:lat "-20.3471"^^xsd:float ;
+     * 	                wgs:long "-43.1127"^^xsd:float ;
      * 	        rdfs:comment "Ponte férrea sobre o rio do Carmo, em Acaiaca (MG). Não atingido pelo rejeito. Área de pastagem." ;
      * 	        rdfs:label "Acaiaca - Carmo 01" .
      */
@@ -122,16 +124,20 @@ public class Load {
 		OWLClassAssertionAxiom classAssertion = dataFactory.getOWLClassAssertionAxiom(geopointClass, geopoint);
 		manager.addAxiom(ontology, classAssertion);
 
-		OWLDataProperty hasLatitude = dataFactory.getOWLDataProperty(":hasLatitude", docepm);
-		OWLDataProperty hasLongitude = dataFactory.getOWLDataProperty(":hasLongitude", docepm);
+		// OWLDataProperty hasLatitude = dataFactory.getOWLDataProperty(":hasLatitude", docepm);
+		// OWLDataProperty hasLongitude = dataFactory.getOWLDataProperty(":hasLongitude", docepm);
+		
+                OWLDataProperty wgsLat = dataFactory.getOWLDataProperty(":lat", wgspm);
+                OWLDataProperty wgsLong = dataFactory.getOWLDataProperty(":long", wgspm);
+
 		OWLDataProperty commentProperty = dataFactory.getOWLDataProperty(":comment", rdfspm);
 		OWLDataProperty labelProperty = dataFactory.getOWLDataProperty(":label", rdfspm);
 
-		OWLDataPropertyAssertionAxiom dataPropertyAssertion = dataFactory.getOWLDataPropertyAssertionAxiom(hasLatitude,
+		OWLDataPropertyAssertionAxiom dataPropertyAssertion = dataFactory.getOWLDataPropertyAssertionAxiom(wgsLat,
 				geopoint, lat);
 		manager.addAxiom(ontology, dataPropertyAssertion);
 
-		dataPropertyAssertion = dataFactory.getOWLDataPropertyAssertionAxiom(hasLongitude, geopoint, lon);
+		dataPropertyAssertion = dataFactory.getOWLDataPropertyAssertionAxiom(wgsLong, geopoint, lon);
 		manager.addAxiom(ontology, dataPropertyAssertion);
 
 		dataPropertyAssertion = dataFactory.getOWLDataPropertyAssertionAxiom(commentProperty, geopoint, commentValue);

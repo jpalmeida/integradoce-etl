@@ -141,9 +141,9 @@ public class UnespExtractTransform {
                 float value = 0.0f;
                 NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
                 if (record.get(header).startsWith("<")) {
-                    // below limit of detection
+                    // TODO treat below limit of detection
                 } else if (record.get(header).startsWith(">")) {
-                    // above limit of detection
+                    // TODO treat above limit of detection
                     value = nf.parse(valueStr.substring(1)).floatValue();
                 } else {
                     value = nf.parse(valueStr).floatValue();

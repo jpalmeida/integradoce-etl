@@ -54,7 +54,7 @@
 							<archive>
 								<manifest>
 									<mainClass>
-										br.ufes.inf.nemo.integradoce.App
+										br.ufes.inf.nemo.integradoce.etl.App
 									</mainClass>
 								</manifest>
 							</archive>
