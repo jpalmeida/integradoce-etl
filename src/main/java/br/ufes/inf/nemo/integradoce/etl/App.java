@@ -62,7 +62,7 @@ public class App {
 
 	public static void main(String[] args) throws OWLOntologyCreationException, OWLOntologyStorageException,
 			SecurityException, IOException, ParseException {
-				
+
 		if (args.length!=2) 
 		{
 			System.err.println("Usage: App <data_input_folder> <outputfile.ttl>");
@@ -87,7 +87,7 @@ public class App {
 		// extract geographic points from metadata file
 		app.extractTransformGeographicPoints(
 				baseDir+
-				"dados_renova/Detalhamento_pontos_PMQQS.csv",
+				"/dados_renova/Detalhamento_pontos_PMQQS.csv",
 				ontology);
 
 		Load.addWellKnownEntities(ontology);
@@ -95,7 +95,7 @@ public class App {
 		File folder;
 
 		// take all csv files in the given folder and their immediate subfolders
-		folder = new File(baseDir+"dados_renova");
+		folder = new File(baseDir+"/dados_renova");
 		for (File f : folder.listFiles())
 		{
 			// if the file is a directory, list the files and extract and transform the csv
@@ -113,10 +113,10 @@ public class App {
 
 		// extract geographic points from metadata file
 		UnespExtractTransform.extractTransformGeographicPointsUNESP(
-			baseDir+"dados_unesp/pontos.csv", ontology);
+			baseDir+"/dados_unesp/pontos.csv", ontology);
 
 		// take all csv files in the given folder and their immediate subfolders
-		folder = new File(baseDir+"dados_unesp/agua");
+		folder = new File(baseDir+"/dados_unesp/agua");
 		for (File f : folder.listFiles())
 		{
 			// if the file is a directory, list the files and extract and transform the csv
