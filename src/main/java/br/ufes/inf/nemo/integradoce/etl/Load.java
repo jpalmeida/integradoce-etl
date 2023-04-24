@@ -95,10 +95,13 @@ public class Load {
      * @param ontology
      */
 	public static void addWellKnownEntities(OWLOntology ontology) {
+                // add agent for Renova
 		OWLClass agentClass = dataFactory.getOWLClass(":Agent", docepm);
 		OWLClassAssertionAxiom classAssertion = dataFactory.getOWLClassAssertionAxiom(agentClass,
 				dataFactory.getOWLNamedIndividual("Renova", integradocepm));
 		manager.addAxiom(ontology, classAssertion);
+
+                // add agent for UNESP team
 		classAssertion = dataFactory.getOWLClassAssertionAxiom(agentClass,
 				dataFactory.getOWLNamedIndividual("IntegradoceUNESP", integradocepm));
                 manager.addAxiom(ontology, classAssertion);
@@ -232,8 +235,8 @@ public class Load {
 
 
 
-	public static void save(OWLOntology ontology) throws OWLOntologyStorageException {
-		File file = new File("/Users/jpalmeida/stardog-home/transformed_integrado.ttl");
+	public static void save(OWLOntology ontology, String pathname) throws OWLOntologyStorageException {
+		File file = new File(pathname);
 		manager.saveOntology(ontology, IRI.create(file.toURI()));
 	}
 

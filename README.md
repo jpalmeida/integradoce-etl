@@ -1,6 +1,6 @@
 # The integradoce extract and transform application
 
-This application performs the extraction of Water quality data from the Rio Doce Basin in various proprietary formats into triples that conform to the "doce water quality ontology" (<http://purl.org/nemo/doce>). 
+This application performs the extraction of Water quality data from the Rio Doce Basin in various proprietary formats into triples that conform to the "doce water quality ontology" (<http://purl.org/nemo/doce>).
 
 ## Renova foundation 2021 format
 
@@ -13,5 +13,3 @@ It includes an [Excel file describing some metadata and context data] (<https://
 See <http://purl.org/nemo/doc/doce> for the ontology usage guide and complete documentation.
 
 See <https://nemo.inf.ufes.br/en/projetos/integradoce/> for background on the overall project and publications.
-
-

@@ -50,3 +50,19 @@
 [04:25:31 PM] INFO: Processing Dados_Rio_Doce_Campanha1.csv
 [04:25:31 PM] INFO: Saving extracted and transformed data points...
 [04:26:50 PM] INFO: Saved extracted and transformed data points.
+Apr 12, 2022 2:53:48 PM br.ufes.inf.nemo.integradoce.etl.App main
+INFO: Loading doce ontology...
+Apr 12, 2022 2:53:56 PM br.ufes.inf.nemo.integradoce.etl.App main
+INFO: Loaded doce ontology.
+Apr 12, 2022 2:53:56 PM br.ufes.inf.nemo.integradoce.etl.UnespExtractTransform extractTransformUNESP
+INFO: Processing Dados_Rio_Doce_Campanha4.csv
+Apr 12, 2022 2:53:56 PM br.ufes.inf.nemo.integradoce.etl.UnespExtractTransform extractTransformUNESP
+INFO: Processing Dados_Rio_Doce_Campanha5.csv
+Apr 12, 2022 2:53:56 PM br.ufes.inf.nemo.integradoce.etl.UnespExtractTransform extractTransformUNESP
+INFO: Processing Dados_Rio_Doce_Campanha2.csv
+Apr 12, 2022 2:53:57 PM br.ufes.inf.nemo.integradoce.etl.UnespExtractTransform extractTransformUNESP
+INFO: Processing Dados_Rio_Doce_Campanha1.csv
+Apr 12, 2022 2:53:57 PM br.ufes.inf.nemo.integradoce.etl.App main
+INFO: Saving extracted and transformed data points...
+Apr 12, 2022 2:53:58 PM br.ufes.inf.nemo.integradoce.etl.App main
+INFO: Saved extracted and transformed data points.
