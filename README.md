@@ -12,6 +12,11 @@ It includes an [Excel file describing some metadata and context data] (<https://
 
 Another format considered for extration is an adhoc format used by UNESP São Vicente researchers in the project, originally in an Excel file. Data was pre-processed into CSV files separating geographical point data and chemical concentration measurements. These files are used as input to the application in this repository.
 
+## Instructions
+
+Clone the repository and run `mvn package` in the repository folder.
+
+Run the app with `java -jar target/etl-0.0.1-SNAPSHOT-jar-with-dependencies.jar <data_input_folder> <outputfile.ttl>`. See `sample_input_data` and `sample_output_data` folders for sample input and output respectively (output data compressed due to github size limits). The data is provided here for exemplification only; data sourced from Renova foundation comes with a disclaimer from that source ("é de sua inteira responsabilidade a interpretação e tratamento das informações deste arquivo").
 
 ## Further information
 
