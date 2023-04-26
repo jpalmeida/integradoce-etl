@@ -58,6 +58,38 @@ public class RenovaExtractTransform {
         riodoce = dataFactory.getOWLNamedIndividual(":RioDoce", docepm);
     }
 
+
+	public static void extractTransformGeographicPoints(String csvFilePath, OWLOntology ontology)
+			throws ParseException, IOException {
+
+		// TODO add geographical information such as city, municipality, river basin
+
+		Reader in = new FileReader(csvFilePath);
+
+		// header:
+		// MONITORAMENTO;CODIGO_PONTO;NOME_PONTO;DESCRICAO_PONTO;TIPO_ESTACAO;AMBIENTE;CORPO_HIDRICO;SUB_BACIA;BACIA;MUNICIPIO;ESTADO;LONGITUDE;LATITUTE;UTM_X;UTM_Y;PROJECAO;DATUM;ALTITUDE;CODIGO_HIDROWEB;CODIGO_PONTO_ANTERIOR
+		// example row:
+		// Aguas Interiores;RVD-03;Mariana - Dique S3;No vertedouro do Dique S3.
+		// Coincide com o antigo ponto: RDC-124. Atingido pelo rejeito;Manual;Agua Doce
+		// Lotico;Corrego Santarém;Córrego Santarém;Rio
+
+		Iterable<CSVRecord> records = CSVFormat.EXCEL.withDelimiter(';').withFirstRecordAsHeader().parse(in);
+		for (CSVRecord record : records)
+		{
+			String codigo = record.get("CODIGO_PONTO");
+			String nome = record.get("NOME_PONTO");
+			String descricao = record.get("DESCRICAO_PONTO");
+			String latitude = record.get("LATITUTE"); // note the typo in LATITUDE... that's part of the Renova format
+			String longitude = record.get("LONGITUDE");
+
+			NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
+			Load.addGeographicPoint(ontology, ":" + codigo.replaceAll("\\s", "-"), nf.parse(latitude).floatValue(),
+					nf.parse(longitude).floatValue(), descricao, nome);
+		}
+	}
+
+
+
     /**
      * Main entry point of the ETL process for Renova CSV files.
      * 

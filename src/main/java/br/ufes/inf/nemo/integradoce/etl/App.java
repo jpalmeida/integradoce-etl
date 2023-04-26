@@ -1,18 +1,12 @@
 package br.ufes.inf.nemo.integradoce.etl;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Locale;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
@@ -21,44 +15,12 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
  * Extracts and transforms to triples conforming to http://purl.org/nemo/doce
  * ontology.
  *
+ * See source repository at <https://github.com/jpalmeida/integradoce-etl>
+ * and project documentation at <https://nemo.inf.ufes.br/en/projetos/integradoce/>.
+ * 
  */
 public class App {
 	private final static Logger LOGGER = Logger.getLogger("ETL");
-
-	public App() {
-
-	}
-
-	public void extractTransformGeographicPoints(String csvFilePath, OWLOntology ontology)
-			throws ParseException, IOException {
-
-		// TODO add geographical information such as city, municipality, river basin
-
-		Reader in = new FileReader(csvFilePath);
-
-		// header:
-		// MONITORAMENTO;CODIGO_PONTO;NOME_PONTO;DESCRICAO_PONTO;TIPO_ESTACAO;AMBIENTE;CORPO_HIDRICO;SUB_BACIA;BACIA;MUNICIPIO;ESTADO;LONGITUDE;LATITUTE;UTM_X;UTM_Y;PROJECAO;DATUM;ALTITUDE;CODIGO_HIDROWEB;CODIGO_PONTO_ANTERIOR
-		// example row:
-		// Aguas Interiores;RVD-03;Mariana - Dique S3;No vertedouro do Dique S3.
-		// Coincide com o antigo ponto: RDC-124. Atingido pelo rejeito;Manual;Agua Doce
-		// Lotico;Corrego Santarém;Córrego Santarém;Rio
-
-		Iterable<CSVRecord> records = CSVFormat.EXCEL.withDelimiter(';').withFirstRecordAsHeader().parse(in);
-		for (CSVRecord record : records)
-		{
-			String codigo = record.get("CODIGO_PONTO");
-			String nome = record.get("NOME_PONTO");
-			String descricao = record.get("DESCRICAO_PONTO");
-			String latitude = record.get("LATITUTE"); // note the typo in LATITUDE... that's part of the Renova format
-			String longitude = record.get("LONGITUDE");
-
-			NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
-			Load.addGeographicPoint(ontology, ":" + codigo.replaceAll("\\s", "-"), nf.parse(latitude).floatValue(),
-					nf.parse(longitude).floatValue(), descricao, nome);
-		}
-	}
-
-
 
 	public static void main(String[] args) throws OWLOntologyCreationException, OWLOntologyStorageException,
 			SecurityException, IOException, ParseException {
@@ -78,15 +40,13 @@ public class App {
 		fh.setFormatter(new SimpleFormatter());
 		LOGGER.addHandler(fh);
 
-		App app = new App();
-
 		// load ontology from web
 		LOGGER.info("Loading doce ontology...");
 		OWLOntology ontology = Load.loadDoce();
 		LOGGER.info("Loaded doce ontology.");
 
 		// extract geographic points from metadata file
-		app.extractTransformGeographicPoints(
+		RenovaExtractTransform.extractTransformGeographicPoints(
 				baseDir+
 				"/dados_renova/Detalhamento_pontos_PMQQS.csv",
 				ontology);
