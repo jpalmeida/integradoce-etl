@@ -133,9 +133,9 @@ public class UnespExtractTransform {
 
                 // create a new Measurement with qualityKindRecord.get(header) and
                 // unitRecord.get(header)
-                System.out.println("Codigo=" + record.get(1));
-                System.out.println("Measurement of " + qualityKindRecord.get(header));
-                System.out.println("Value=" + record.get(header));
+                // System.out.println("Codigo=" + record.get(1));
+                // System.out.println("Measurement of " + qualityKindRecord.get(header));
+                // System.out.println("Value=" + record.get(header));
 
                 String valueStr = record.get(header);
                 float value = 0.0f;

@@ -2,11 +2,16 @@
 
 This application performs the extraction of Water quality data from the Rio Doce Basin in various proprietary formats into triples that conform to the "doce water quality ontology" (<http://purl.org/nemo/doce>).
 
-## Renova foundation 2021 format
+## Renova foundation format
 
-One of the formats considered for extraction is that of Renova foundation as made available in 2021 through <https://portal-de-monitoramento-rio-doce-fundacaorenova.hub.arcgis.com/pages/pa-download>
+One of the formats considered for extraction is that of Renova foundation as made available in 2021--2023 through <https://portal-de-monitoramento-rio-doce-fundacaorenova.hub.arcgis.com/pages/pa-download>.
 
-It includes an [Excel file describing some metadata and context data] (<https://gis.fundacaorenova.org/portal/sharing/rest/content/items/cdd108af7c024914b8563644523c7485/data>) as well as data-point CSV files that can be downloaded by selecting filters at the website. The first tab of the Excel file (Detalhamento_pontos_PMQQS.xlsx) describes the various geographical points that are referenced in the data-point files. This first tab should be exported into a CSV file in Excel and placed with other data-point CSV files in the same folder for extraction and transformation.
+It includes an [Excel file describing some metadata and context data] (<https://gis.fundacaorenova.org/portal/sharing/rest/content/items/cdd108af7c024914b8563644523c7485/data>) as well as data-point CSV files that can be downloaded by selecting filters at the website. The first tab of the Excel file (Detalhamento_pontos_PMQQS.xlsx) describes the various geographical points that are referenced in the data-point files. This first tab should be exported into a CSV file in Excel (named Detalhamento_pontos_PMQQS.csv) and placed with other data-point CSV files in the same folder for extraction and transformation.
+
+## UNESP São Vicente format
+
+Another format considered for extration is an adhoc format used by UNESP São Vicente researchers in the project, originally in an Excel file. Data was pre-processed into CSV files separating geographical point data and chemical concentration measurements. These files are used as input to the application in this repository.
+
 
 ## Further information
 

@@ -66,6 +66,7 @@ public class App {
 		if (args.length!=2) 
 		{
 			System.err.println("Usage: App <data_input_folder> <outputfile.ttl>");
+			System.err.println("The <data_input_folder> should have two subfolders 'dados_renova' and 'dados_unesp' with respective CSV files.");
 			return;
 		}
 
